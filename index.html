@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Недельный фокус</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero">
+        <div>
+          <p class="hero__eyebrow">Планирование недели</p>
+          <h1>Недельный фокус</h1>
+        </div>
+
+        <section class="week-progress" aria-labelledby="progress-title">
+          <p id="progress-title" class="week-progress__counter">0 из 0 выполнено</p>
+          <strong class="week-progress__percent">0%</strong>
+          <div class="progress-bar" role="progressbar" aria-label="Прогресс недели" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="progress-bar__value"></div>
+          </div>
+        </section>
+      </header>
+
+      <form class="quick-add" novalidate>
+        <input class="quick-add__input" id="quick-task-text" name="taskText" type="text" maxlength="200" placeholder="Новая задача" aria-label="Новая задача">
+        <select class="quick-add__select" id="quick-task-day" name="day" aria-label="День недели">
+          <option value="mon" selected>Понедельник</option>
+          <option value="tue">Вторник</option>
+          <option value="wed">Среда</option>
+          <option value="thu">Четверг</option>
+          <option value="fri">Пятница</option>
+          <option value="sat">Суббота</option>
+          <option value="sun">Воскресенье</option>
+        </select>
+        <select class="quick-add__select" id="quick-task-category" name="category" aria-label="Категория">
+          <option value="business" selected>Бизнес</option>
+          <option value="personal">Личное</option>
+          <option value="learning">Учебные</option>
+        </select>
+        <button class="quick-add__button" type="submit">Добавить</button>
+        <p class="form-error" aria-live="polite"></p>
+      </form>
+
+      <section class="week-tools" aria-label="Управление неделями">
+        <div class="week-switcher">
+          <button class="week-switcher__button" type="button" data-action="prev-week" aria-label="Предыдущая неделя">‹</button>
+          <div class="week-switcher__current">
+            <span>Текущая неделя</span>
+            <strong id="week-range-label">Неделя</strong>
+            <div class="week-shortcuts" aria-label="Быстрый переход к прошлым неделям">
+              <button class="week-shortcuts__button" type="button" data-action="jump-week" data-offset="-1">-1</button>
+              <button class="week-shortcuts__button" type="button" data-action="jump-week" data-offset="-2">-2</button>
+              <button class="week-shortcuts__button" type="button" data-action="jump-week" data-offset="-3">-3</button>
+            </div>
+          </div>
+          <button class="week-switcher__button" type="button" data-action="next-week" aria-label="Следующая неделя">›</button>
+        </div>
+
+        <div class="export-actions" aria-label="Экспорт текущей недели">
+          <span class="export-actions__label">Скачать</span>
+          <button class="export-actions__button" type="button" data-action="export-pdf">PDF</button>
+          <button class="export-actions__button" type="button" data-action="export-xls">XLS</button>
+        </div>
+
+        <div class="month-calendar" aria-label="Наполненность месяцев задачами">
+          <div class="month-calendar__header">
+            <span>Календарь наполненности</span>
+            <strong id="calendar-year-label">2026</strong>
+          </div>
+          <div class="month-calendar__grid" id="month-calendar-grid"></div>
+        </div>
+      </section>
+
+      <article class="reflection-card">
+        <div class="reflection-card__top">
+          <p>Рефлексия</p>
+          <span id="reflection-average">Средняя оценка: 5/5</span>
+        </div>
+        <h2>Итоги недели</h2>
+        <div class="reflection-average-widget" id="reflection-average-widget" data-state="star" aria-live="polite">
+          <span class="reflection-average-widget__icon">★</span>
+          <span class="reflection-average-widget__text">Отличный баланс</span>
+        </div>
+
+        <div class="reflection-layout">
+          <div class="reflection-field">
+            <label class="reflection-label" for="productivity-range">
+              Уровень продуктивности <span class="reflection-widget" id="productivity-widget">★</span>
+            </label>
+            <select class="reflection-select" id="productivity-range">
+              <option value="1">1 - очень низкий</option>
+              <option value="2">2 - слабый</option>
+              <option value="3">3 - стабильный</option>
+              <option value="4">4 - сильный</option>
+              <option value="5" selected>5 - максимум</option>
+            </select>
+          </div>
+
+          <div class="reflection-field">
+            <label class="reflection-label" for="emotion-range">
+              Эмоциональная наполненность <span class="reflection-widget" id="emotion-widget">★</span>
+            </label>
+            <select class="reflection-select" id="emotion-range">
+              <option value="1">1 - тяжело</option>
+              <option value="2">2 - напряженно</option>
+              <option value="3">3 - спокойно</option>
+              <option value="4">4 - тепло и энергия</option>
+              <option value="5" selected>5 - отличный заряд</option>
+            </select>
+          </div>
+
+          <p class="reflection-summary" id="reflection-summary">Хороший баланс эффективности и состояния.</p>
+          <textarea id="reflection-comment" class="reflection-comment" maxlength="500" rows="3" placeholder="Короткий комментарий недели"></textarea>
+        </div>
+      </article>
+
+      <section class="week-grid" aria-label="План недели">
+        <article class="day-card" data-day="mon"></article>
+        <article class="day-card" data-day="tue"></article>
+        <article class="day-card" data-day="wed"></article>
+        <article class="day-card" data-day="thu"></article>
+        <article class="day-card" data-day="fri"></article>
+        <article class="day-card" data-day="sat"></article>
+        <article class="day-card" data-day="sun"></article>
+        <article class="week-summary-card" id="week-summary-card"></article>
+      </section>
+
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
